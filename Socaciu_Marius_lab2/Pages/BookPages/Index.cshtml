@@ -1,0 +1,53 @@
+
+@page
+@model Socaciu_Marius_lab2.Pages.BookPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Publishing Date</th>
+            <th>Publisher</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Book)
+        {
+            <tr>
+                <td>@item.Title</td>
+
+                <td>
+                    @(item.Author != null
+                        ? item.Author.FirstName + " " + item.Author.LastName
+                        : "No author assigned")
+                </td>
+
+                <td>@item.Price</td>
+
+                <td>@item.PublishingDate.ToShortDateString()</td>
+
+                <td>@(item.Publisher?.PublisherName ?? "No publisher")</td>
+
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+```
